@@ -9,6 +9,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
+import org.springframework.core.env.Environment;
 import org.springframework.web.filter.ShallowEtagHeaderFilter;
 
 import javax.annotation.Resource;
@@ -22,13 +24,19 @@ public class StockManagementApplication {
     @Resource
     private ProductRepository repository;
 
+    @Resource
+    private Environment environment;
+
     public static void main(String[] args) {
         SpringApplication.run(StockManagementApplication.class, args);
     }
 
     @Bean
+    @Profile("!test")
     InitializingBean initDatabase() {
         return () -> {
+            System.out.println(environment.getActiveProfiles());
+
             final ObjectMapper mapper = new ObjectMapper();
             final TypeReference<List<Product>> typeReference = new TypeReference<>() {
             };

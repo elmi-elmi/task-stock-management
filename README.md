@@ -6,7 +6,7 @@ It is also possible to acquire the current stock of a Product.
 The Application initializes the Database by adding a dummy Product with Id: 1 and an initial stock of 100 for test purposes.
 
 ### Technologies ###
-* Java 8
+* Java 11
 * Spring Boot
 * H2 embedded memory database
 
@@ -17,8 +17,7 @@ The Application initializes the Database by adding a dummy Product with Id: 1 an
 * Running Application using IntelliJ
     - Open Application and Run "StockManagementApplication"
 
-    ![Alt text](run-intellij.png)
-
+    ![Run IntelliJ](stock-management-raw/run-intellij.png)
 
 * Running in Command Line
     - Use command:
@@ -27,17 +26,17 @@ The Application initializes the Database by adding a dummy Product with Id: 1 an
 
 ### Using ###
 * Get a Product by ID
-    - `$ curl -s -i -w "\n" -X GET localhost:8080/product/1`
+    - `$ curl -s -i -w "\n" -X GET localhost:8080/api/product/1`
 
 * Get just a Product stock by Id
-    - `$ curl -s -i -w "\n" -X GET localhost:8080/product/1/stock`
+    - `$ curl -s -i -w "\n" -X GET localhost:8080/api/product/1/stock`
 
 * Refill a Product stock
-    - `$ curl -s -i -w "\n" -X PUT localhost:8080/product/1/refill?amount=5`
+    - `$ curl -s -i -w "\n" -X PUT localhost:8080/api/product/1/refill?amount=5`
 
 * Decrease the Product stock
-    - `$ curl -s -i -w "\n" -X PUT localhost:8080/product/1/buy?amount=3`
+    - `$ curl -s -i -w "\n" -X PUT localhost:8080/api/product/1/buy?amount=3`
     
     ** Testing the Error case:
-    - `$ curl -s -i -w "\n" -X PUT localhost:8080/product/1/buy?amount=200`
+    - `$ curl -s -i -w "\n" -X PUT localhost:8080/api/product/1/buy?amount=200`
     

@@ -15,10 +15,7 @@ export default{
     },
     getStockById(id){
         return api.get(`/product/${id}/stock`,13)
-            .then(()=>{
-                this.title = this.$store.getters.getProduct
 
-            })
     },
     putRefillProduct(product,amount){
         return api.put(`/product/${product.id}/refill?amount=${amount}`)

@@ -17,10 +17,10 @@ export default new Vuex.Store({
         SET_PRODUCT(state, product) {
             state.product = product
         },
-        SET_STOCK(state, stock) {
+        SET_STOCK(state, stock){
             state.stock = stock
         },
-        REFILL_PRODUCT(state, product) {
+        REFILL_PRODUCT(state, product){
             state.product = product
         }
     },
@@ -29,13 +29,13 @@ export default new Vuex.Store({
             return ProductService.getProductById(productId)
                 .then(({data}) => commit('SET_PRODUCT', data))
         },
-        fetchStockById({commit}, stockId) {
+        fetchStockById({commit}, stockId){
             return ProductService.getStockById(stockId)
-                .then(({data}) => commit('SET_STOCK', data))
+                .then(({data})=>commit('SET_STOCK',data))
         },
-        refillStock({commit, getters}, amount) {
+        refillStock({commit, getters}, amount){
             return ProductService.putRefillProduct(getters.getProduct, amount)
-                .then(({data}) => commit('REFILL_PRODUCT', data))
+                .then(({data})=>commit('REFILL_PRODUCT',data))
         }
 
     },

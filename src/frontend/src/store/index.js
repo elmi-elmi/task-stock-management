@@ -33,7 +33,10 @@ export default new Vuex.Store({
             return ProductService.getStockById(stockId)
                 .then(({data}) => commit('SET_STOCK', data))
         },
-
+        refillStock({commit, getters}, amount) {
+            return ProductService.putRefillProduct(getters.getProduct, amount)
+                .then(({data}) => commit('REFILL_PRODUCT', data))
+        }
 
     },
     modules: {}

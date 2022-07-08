@@ -1,6 +1,10 @@
 import ProductService from "@/services/ProductService";
 
 export default {
+    /*=======================================================
+        REQUESTS TO BACKEND
+     =======================================================*/
+
     /*
      *  GET request --> to fetch product by Id
      */
@@ -22,7 +26,6 @@ export default {
 
     /*
      *  PUT request --> to increase amount of a stock
-     *  $ curl -s -i -w "\n" -X PUT localhost:8080/api/product/1/refill?amount=5
      */
     addStockAmount({commit, getters}, amount) {
         return ProductService.putRefillProduct(getters.getProduct, amount)
@@ -32,7 +35,6 @@ export default {
 
     /*
      *  PUT request --> to decrease amount of a stock
-     *  $ curl -s -i -w "\n" -X PUT localhost:8080/api/product/1/buy?amount=3
      */
     decreaseStockAmount({commit, getters}, amount) {
         return ProductService.putDecreaseProduct(getters.getProduct, amount)

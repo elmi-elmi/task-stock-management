@@ -1,5 +1,9 @@
 import axios from 'axios';
 
+
+/*=======================================================
+    API CALL WITH AXIOS
+ =======================================================*/
 const api = axios.create({
     baseURL:'http://localhost:8080/api',
     withCredentials:false,
@@ -10,6 +14,10 @@ const api = axios.create({
 })
 
 export default{
+
+    /*=======================================================
+        GET REQUESTS (/product/)
+     =======================================================*/
     /*
     *  GET request
     *  $ curl -s -i -w "\n" -X GET localhost:8080/api/product/1
@@ -27,6 +35,11 @@ export default{
 
     },
 
+
+    /*=======================================================
+       PUT REQUESTS (/product/)
+      =======================================================*/
+
     /*
    *  PUT request
    *  $ curl -s -i -w "\n" -X PUT localhost:8080/api/product/1/refill?amount=5
@@ -34,6 +47,7 @@ export default{
     putRefillProduct(product,amount){
         return api.put(`/product/${product.id}/refill?amount=${amount}`)
     },
+
 
     /*
    *  PUT request
@@ -45,4 +59,3 @@ export default{
 
 }
 
-// localhost:8080/api/product/1/refill?amount=5

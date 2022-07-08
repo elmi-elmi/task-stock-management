@@ -26,9 +26,10 @@ export default {
   methods: {
     show() {
       try {
-        this.$store.dispatch('fetchProductById', 2)
+        this.$store.dispatch('product/fetchProductById', 2)
             .then(() => {
-              this.title = this.$store.getters.getProduct
+              console.log('**',this.$store.getters)
+              this.title = this.$store.getters['product/getProduct']
             })
       } catch (e) {
         console.log('there is a problem')
@@ -36,9 +37,9 @@ export default {
     },
     showStock(){
       try {
-        this.$store.dispatch('fetchStockById',10)
+        this.$store.dispatch('product/fetchStockById',10)
         .then(()=>{
-          this.title = this.$store.getters.getStock
+          this.title = this.$store.getters['product/getStock']
         })
       }catch (e){
         console.log('there is a problem in stock')
@@ -46,9 +47,9 @@ export default {
     },
     refill(){
       try{
-        this.$store.dispatch('addStockAmount',13)
+        this.$store.dispatch('product/addStockAmount',13)
         .then(()=>{
-          this.title = this.$store.getters.getProduct
+          this.title = this.$store.getters['product/getProduct']
         })
       }catch(e){
         console.log('there is a problem in refill')
@@ -57,8 +58,8 @@ export default {
     },
   decreaseAmount(){
     try{
-      this.$store.dispatch('decreaseStockAmount', 15).then(()=>{
-        this.title = this.$store.getters.getProduct
+      this.$store.dispatch('product/decreaseStockAmount', 15).then(()=>{
+        this.title = this.$store.getters['product/getProduct']
       })
     }catch (e) {
       console.log('decrease amount problem')

@@ -22,7 +22,11 @@ export default new Vuex.Store({
         },
         REFILL_PRODUCT(state, product){
             state.product = product
+        },
+        DECREASE_PRODUCT(state,product){
+            state.product = product
         }
+        // Todo => change to UPDATE_PRODUCT
     },
     actions: {
         fetchProductById({commit}, productId) {
@@ -33,10 +37,15 @@ export default new Vuex.Store({
             return ProductService.getStockById(stockId)
                 .then(({data})=>commit('SET_STOCK',data))
         },
-        refillStock({commit, getters}, amount){
+        addStockAmount({commit, getters}, amount){
             return ProductService.putRefillProduct(getters.getProduct, amount)
                 .then(({data})=>commit('REFILL_PRODUCT',data))
+        },
+        decreaseStockAmount({commit, getters},amount){
+            return ProductService.putDecreaseProduct(getters.getProduct,amount)
+                .then(({data})=>commit('DECREASE_PRODUCT',data))
         }
+
 
     },
     modules: {}

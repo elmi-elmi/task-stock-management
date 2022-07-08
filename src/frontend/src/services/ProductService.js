@@ -19,6 +19,9 @@ export default{
     },
     putRefillProduct(product,amount){
         return api.put(`/product/${product.id}/refill?amount=${amount}`)
+    },
+    putDecreaseProduct(product, amount){
+        return api.put(`/product/${product.id}/buy?amount=${amount}`)
     }
 
 }

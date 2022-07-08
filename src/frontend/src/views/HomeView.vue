@@ -7,6 +7,8 @@
     <button @click="showStock">stock</button>
     <hr>
     <button @click="refill">refill</button>
+    <hr>
+    <button @click="decreaseAmount">decrease</button>
   </div>
 </template>
 
@@ -44,7 +46,7 @@ export default {
     },
     refill(){
       try{
-        this.$store.dispatch('refillStock',13)
+        this.$store.dispatch('addStockAmount',13)
         .then(()=>{
           this.title = this.$store.getters.getProduct
         })
@@ -52,8 +54,17 @@ export default {
         console.log('there is a problem in refill')
 
       }
+    },
+  decreaseAmount(){
+    try{
+      this.$store.dispatch('decreaseStockAmount', 15).then(()=>{
+        this.title = this.$store.getters.getProduct
+      })
+    }catch (e) {
+      console.log('decrease amount problem')
     }
   }
+  },
 
 
 }

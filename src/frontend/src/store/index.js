@@ -29,6 +29,10 @@ export default new Vuex.Store({
             return ProductService.getProductById(productId)
                 .then(({data}) => commit('SET_PRODUCT', data))
         },
+        fetchStockById({commit}, stockId) {
+            return ProductService.getStockById(stockId)
+                .then(({data}) => commit('SET_STOCK', data))
+        },
 
 
     },

@@ -32,14 +32,20 @@
     </v-list-item>
 
     <v-card
-        class="d-flex justify-center mb-2 " flat tile
+        class="d-flex justify-center align-center mb-2 " flat tile
     >
-
-
-
-
-      <v-btn
+      <v-text-field
           v-if="title"
+          class="mb-4"
+          v-model="amount"
+          label="Refill or Decrease Stock"
+          light
+          flat
+          type="number"
+
+      ></v-text-field>
+      <v-btn
+          :disabled="!amount"
           class="mx-2" fab dark small color="teal" @click="refill"
       >
         <v-icon dark>
@@ -49,7 +55,7 @@
 
 
       <v-btn
-          v-if="title"
+          :disabled="!amount"
           class="mx-2" fab dark small color="pink" @click="decreaseAmount"
       >
         <v-icon dark>
@@ -59,11 +65,12 @@
       </v-btn>
     </v-card>
     <div
+        v-if="!title"
+
         class="search-somthing"
     >
     <p>Search Products</p>
       <v-icon
-          v-if="!title"
           x-large
           color="green darken-2"
       >
@@ -73,8 +80,9 @@
 
   </v-card>
 
+
     <v-card
-        class="mx-auto pa-4 d-flex align-center flex-column "
+        class="mx-auto pa-4 d-flex align-center  "
         max-width="400px"
         min-height="120px"
         outlined
@@ -82,22 +90,28 @@
     >
 
         <v-text-field
-            class="mb-4"
+            class="mb-2"
             v-model.number="id"
             label="Enter Id"
             light
             flat
             clearable
             clear-icon="mdi-close-circle-outline"
+            @keyup.enter="search"
 
         ></v-text-field>
 
-        <v-btn
-            :disabled="!id"
-            outlined   text @click="search"
-        >
-          Search
-        </v-btn>
+      <v-btn
+          :disabled="!id"
+          class="mx-2" fab dark small color="teal"
+          @click="search"
+
+      >
+        <v-icon light>
+          mdi-magnify
+        </v-icon>
+
+      </v-btn>
 
 
 
@@ -112,7 +126,7 @@ import ProductService from "@/services/ProductService";
 export default {
   name: 'Home',
   data() {
-    return {title: null, id:null}
+    return {title: null, id:null, amount:null}
   },
   mounted() {
 
@@ -124,6 +138,7 @@ export default {
             .then(() => {
               this.title = this.$store.getters['product/getProduct']
               this.id = null
+              this.amount=null;
             })
 
       } catch (e) {
@@ -142,9 +157,10 @@ export default {
     },
     refill() {
       try {
-        this.$store.dispatch('product/addStockAmount', 13)
+        this.$store.dispatch('product/addStockAmount', this.amount)
             .then(() => {
               this.title = this.$store.getters['product/getProduct']
+              this.amount = null;
             })
       } catch (e) {
         console.log('there is a problem in refill')
@@ -153,8 +169,10 @@ export default {
     },
     decreaseAmount() {
       try {
-        this.$store.dispatch('product/decreaseStockAmount', 15).then(() => {
-          this.title = this.$store.getters['product/getProduct']
+        this.$store.dispatch('product/decreaseStockAmount', this.amount).then(() => {
+          this.title = this.$store.getters['product/getProduct'];
+          this.amount = null;
+
         })
       } catch (e) {
         console.log('decrease amount problem')

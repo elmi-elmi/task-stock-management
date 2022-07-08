@@ -9,7 +9,6 @@ export default {
      *  GET request --> to fetch product by Id
      */
     fetchProductById({commit}, productId) {
-        console.log('hhhhhhhhhhhhh')
         return ProductService.getProductById(productId)
             .then(({data}) => commit('SET_PRODUCT', data))
     },

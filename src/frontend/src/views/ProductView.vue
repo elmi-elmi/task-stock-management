@@ -37,42 +37,11 @@
 
       </v-list-item>
 
-      <v-card
-          class="d-flex justify-center align-center mb-2 " flat tile
-      >
-        <v-text-field
-            v-if="product.name"
-            class="mb-4"
-            v-model="amount"
-            label="Refill or Decrease Stock"
-            light
-            flat
-            type="number"
-
-        ></v-text-field>
-        <v-btn
-            :disabled="!amount"
-            class="mx-2" fab dark small color="teal" @click="refill"
-        >
-          <v-icon dark>
-            mdi-plus
-          </v-icon>
-        </v-btn>
+      <InputAmountComp v-if="product.name"  />
 
 
-        <v-btn
-            :disabled="!amount"
-            class="mx-2" fab dark small color="pink" @click="decreaseAmount"
-        >
-          <v-icon dark>
-            mdi-minus
-          </v-icon>
-
-        </v-btn>
-      </v-card>
       <div
-          v-if="!product"
-
+          v-else
           class="searchProduct-something"
       >
         <p>Search Products</p>
@@ -87,41 +56,7 @@
     </v-card>
 
 
-<!--    <v-card-->
-<!--        class="mx-auto pa-4 d-flex align-center  "-->
-<!--        max-width="400px"-->
-<!--        min-height="120px"-->
-<!--        outlined-->
-<!--        elevation="18"-->
-<!--    >-->
-
-<!--      <v-text-field-->
-<!--          autofocus-->
-<!--          class="mb-2"-->
-<!--          v-model.number="id"-->
-<!--          label="Enter Id"-->
-<!--          light-->
-<!--          flat-->
-<!--          clearable-->
-<!--          clear-icon="mdi-close-circle-outline"-->
-<!--          @keyup.enter="searchProduct"-->
-
-<!--      ></v-text-field>-->
-
-<!--      <v-btn-->
-<!--          :disabled="!id"-->
-<!--          class="mx-2" fab dark small color="teal"-->
-<!--          @click="searchProduct"-->
-
-<!--      >-->
-<!--        <v-icon light>-->
-<!--          mdi-magnify-->
-<!--        </v-icon>-->
-<!--      </v-btn>-->
-
-<!--    </v-card>-->
-
-    <SearchCardComp v-model="id" @search="searchProduct" />
+    <SearchCardComp v-model="id" @search="searchProduct"/>
 
 
   </div>
@@ -129,11 +64,13 @@
 </template>
 
 <script>
-import ProductService from "@/services/ProductService";
+
 import SearchCardComp from "@/components/SearchCardComp";
+import InputAmountComp from "@/components/InputAmountComp";
+
 export default {
   name: 'ProductView',
-  components:{SearchCardComp},
+  components: {SearchCardComp, InputAmountComp},
   data() {
     return {id: null, amount: null}
   },
@@ -150,15 +87,12 @@ export default {
               this.id = null
               this.amount = null;
             }).catch((e) => {
-          console.log('---- 404')
-          console.log(e)
-          this.$router.push({name:'notFound'})
+          this.$router.push({name: 'notFound'})
         })
 
 
       } catch (e) {
         console.log('there is a problem (500)')
-        console.log(e)
 
       }
     },
@@ -167,36 +101,37 @@ export default {
         this.$store.dispatch('product/fetchStockById', 10)
             .then(() => {
               this.product = this.$store.getters['product/getStock']
-            }).catch((e) => {
-          console.log('---- 404')
-          console.log(e)
-        })
+            })
+            .catch((e) => {
+              console.log('---- 404')
+              console.log(e)
+            })
       } catch (e) {
         console.log('there is a problem in stock (500)')
         console.log(e)
       }
     },
-    refill() {
-      try {
-        this.$store.dispatch('product/addStockAmount', this.amount)
-            .then(() => {
-              this.amount = null;
-            })
-      } catch (e) {
-        console.log('there is a problem in refill')
-
-      }
-    },
-    decreaseAmount() {
-      try {
-        this.$store.dispatch('product/decreaseStockAmount', this.amount).then(() => {
-          this.amount = null;
-
-        })
-      } catch (e) {
-        console.log('decrease amount problem')
-      }
-    }
+    //   refill() {
+    //     try {
+    //       this.$store.dispatch('product/addStockAmount', this.amount)
+    //           .then(() => {
+    //             this.amount = null;
+    //           })
+    //     } catch (e) {
+    //       console.log('there is a problem in refill')
+    //
+    //     }
+    //   },
+    //   decreaseAmount() {
+    //     try {
+    //       this.$store.dispatch('product/decreaseStockAmount', this.amount).then(() => {
+    //         this.amount = null;
+    //
+    //       })
+    //     } catch (e) {
+    //       console.log('decrease amount problem')
+    //     }
+    //   }
   },
 
 

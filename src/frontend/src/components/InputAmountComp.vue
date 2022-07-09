@@ -12,8 +12,9 @@
 
     ></v-text-field>
     <v-btn
+        ref="RefillBtn"
         :disabled="!amount"
-        class="mx-2" fab dark small color="teal" @click="refill"
+        class="mx-2" fab dark small color="teal" @click="changeStock('refill')"
     >
       <v-icon dark>
         mdi-plus
@@ -22,8 +23,9 @@
 
 
     <v-btn
+        ref="decreaseBtn"
         :disabled="!amount"
-        class="mx-2" fab dark small color="pink" @click="decreaseAmount"
+        class="mx-2" fab dark small color="pink" @click="changeStock('decrease')"
     >
       <v-icon dark>
         mdi-minus
@@ -38,15 +40,19 @@
 
 export default {
   name: "InputAmountComp",
-  data(){
-    return{
-      amount:null}
+  data() {
+    return {
+      amount: null
+    }
   },
 
-  methods:{
-    refill() {
+  methods: {
+    changeStock(req) {
+      const requestToStore = req === 'refill'
+          ? 'product/addStockAmount'
+          : 'product/decreaseStockAmount'
       try {
-        this.$store.dispatch('product/addStockAmount', this.amount)
+        this.$store.dispatch(requestToStore, this.amount)
             .then(() => {
               this.amount = null;
             })
@@ -55,16 +61,6 @@ export default {
 
       }
     },
-    decreaseAmount() {
-      try {
-        this.$store.dispatch('product/decreaseStockAmount', this.amount).then(() => {
-          this.amount = null;
-
-        })
-      } catch (e) {
-        console.log('decrease amount problem')
-      }
-    }
   },
 }
 </script>

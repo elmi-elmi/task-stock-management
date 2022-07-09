@@ -10,21 +10,20 @@
     <v-text-field
         autofocus
         class="mb-2"
-        :value="value"
-        @input="handelInput"
+        v-model="id"
         :label="label"
         light
         flat
         clearable
         clear-icon="mdi-close-circle-outline"
-        @keyup.enter="buttonSearchHandling"
+        @keyup.enter="sendRequest"
 
     ></v-text-field>
 
     <v-btn
-        :disabled="!value"
+        :disabled="!id"
         class="mx-2" fab dark small color="teal"
-        @click="buttonSearchHandling"
+        @click="sendRequest"
 
     >
       <v-icon light>
@@ -38,24 +37,32 @@
 <script>
 export default {
   name: "SearchCardComp",
+  data(){return{id:null}},
   props:{
-    value:{
-      type:String,
-      default:null
-    },
     label:{
       type:String,
       default:'Enter Id'
     }
   },
-  emits:['input','search'],
   methods:{
-    buttonSearchHandling(){
-      this.$emit('search')
+    sendRequest() {
+      const requestToStore = this.$route.name==='product'
+          ?'product/fetchProductById'
+          :'product/fetchStockById'
+      try {
+        this.$store.dispatch(requestToStore, this.id)
+            .then(() => {
+              this.id = null
+            }).catch((e) => {
+          this.$router.push({name: 'notFound'})
+        })
+
+      } catch (e) {
+        console.log('there is a problem (500)')
+
+      }
     },
-    handelInput(e){
-      this.$emit('input',e)
-    }
+
   }
 }
 </script>

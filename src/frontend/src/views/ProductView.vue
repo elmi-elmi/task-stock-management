@@ -8,7 +8,7 @@
 
     </v-card>
 
-    <SearchCardComp v-model="id" @search="searchProduct"/>
+    <SearchCardComp />
 
 
   </div>
@@ -33,40 +33,6 @@ export default {
       return this.$store.getters['product/getProduct']
     }
   },
-  methods: {
-    searchProduct() {
-      try {
-        this.$store.dispatch('product/fetchProductById', this.id)
-            .then(() => {
-              this.id = null
-            }).catch((e) => {
-          this.$router.push({name: 'notFound'})
-        })
-
-
-      } catch (e) {
-        console.log('there is a problem (500)')
-
-      }
-    },
-    showStock() {
-      try {
-        this.$store.dispatch('product/fetchStockById', 10)
-            .then(() => {
-              this.product = this.$store.getters['product/getStock']
-            })
-            .catch((e) => {
-              console.log('---- 404')
-              console.log(e)
-            })
-      } catch (e) {
-        console.log('there is a problem in stock (500)')
-        console.log(e)
-      }
-    },
-
-  },
-
 
 }
 </script>

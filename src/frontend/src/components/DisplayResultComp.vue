@@ -1,11 +1,15 @@
 <template>
-  <v-list-item three-line class="mb-12"
+  <div
+  class="pa-4"
+  >
+  <v-list-item
+      three-line class="mb-12  "
+
   >
     <v-list-item-content>
       <v-card
           min-width="260"
-
-          class="d-flex align-center justify-space-between mb-2"
+          class="d-flex align-center justify-space-between mb-2 "
           flat
           tile
       >
@@ -28,6 +32,7 @@
     </v-list-item-content>
 
   </v-list-item>
+  </div>
 </template>
 
 <script>

@@ -12,6 +12,7 @@
         class="mb-2"
         v-model="id"
         :label="label"
+        @input="expandHandling"
         light
         flat
         clearable
@@ -40,13 +41,24 @@ export default {
   data() {
     return {id: null}
   },
+  emits:['value'],
   props: {
     label: {
       type: String,
       default: 'Enter Id'
+    },
+    value:{
+      type:Boolean,
+      default:false
+    }
+  },
+  computed:{
+    expandHandling(){
+       this.$emit('input',!!this.id)
     }
   },
   methods: {
+
     sendRequest() {
       const requestToStore = this.$route.name === 'product'
           ? 'product/fetchProductById'

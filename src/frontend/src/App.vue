@@ -24,7 +24,7 @@
 
           <v-col cols="12" sm="8"
           >
-              <router-view/>
+            <router-view/>
           </v-col>
         </v-row>
 

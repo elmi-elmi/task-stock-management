@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: "NoSearchFalBack",
+  name: "NoSearchFallback",
   props:{
     page:{
       type:String,

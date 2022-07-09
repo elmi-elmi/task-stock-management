@@ -1,6 +1,6 @@
 <template>
   <v-card
-      class="d-flex justify-center align-center mb-2 " flat tile
+      class="d-flex justify-center align-center mb-2 pa-4 " flat tile
   >
     <v-text-field
         class="mb-4"

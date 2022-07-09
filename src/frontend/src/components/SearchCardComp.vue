@@ -37,34 +37,32 @@
 <script>
 export default {
   name: "SearchCardComp",
-  data(){return{id:null}},
-  props:{
-    label:{
-      type:String,
-      default:'Enter Id'
+  data() {
+    return {id: null}
+  },
+  props: {
+    label: {
+      type: String,
+      default: 'Enter Id'
     }
   },
-  methods:{
+  methods: {
     sendRequest() {
-      const requestToStore = this.$route.name==='product'
-          ?'product/fetchProductById'
-          :'product/fetchStockById'
-      try {
-        this.$store.dispatch(requestToStore, this.id)
-            .then(() => {
-              this.id = null
-            }).catch((e) => {
-          this.$router.push({name: 'notFound'})
-        })
+      const requestToStore = this.$route.name === 'product'
+          ? 'product/fetchProductById'
+          : 'product/fetchStockById'
 
-      } catch (e) {
-        console.log(e)
-        console.log('there is a problem (500)')
+      this.$store.dispatch(requestToStore, this.id)
+          .then(() => this.id = null)
+          .catch((e) => {
+            let name = '404Resource'
+            if (e.code === "ERR_NETWORK") name = 'networkError'
+            this.$router.push({name, params: {message: e.message,res:e.response.data}})
+          })
 
-      }
-    },
+    }
+  },
 
-  }
 }
 </script>
 

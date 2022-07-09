@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import ProductView from '../views/ProductView.vue';
 import StockView from '../views/StockView.vue'
 import NotFoundView from "@/views/NotFoundView";
+import NetworkErrorView from "@/views/NetworkErrorView";
 Vue.use(VueRouter)
 
 const routes = [
@@ -25,6 +26,12 @@ const routes = [
     path:'/404/:resource',
     name:'404Resource',
     component:NotFoundView,
+    props:true
+  },
+  {
+    path:'/500',
+    name:'networkError',
+    component: NetworkErrorView,
     props:true
   }
 ]

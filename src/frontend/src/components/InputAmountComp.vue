@@ -14,7 +14,7 @@
     <v-btn
         ref="RefillBtn"
         :disabled="!amount"
-        class="mx-2" fab dark small color="teal" @click="changeStock('refill')"
+        class="mx-2" fab dark small color="teal" @click="changeStockValue('refill')"
     >
       <v-icon dark>
         mdi-plus
@@ -25,7 +25,7 @@
     <v-btn
         ref="decreaseBtn"
         :disabled="!amount"
-        class="mx-2" fab dark small color="pink" @click="changeStock('decrease')"
+        class="mx-2" fab dark small color="pink" @click="changeStockValue('decrease')"
     >
       <v-icon dark>
         mdi-minus
@@ -47,26 +47,25 @@ export default {
   },
 
   methods: {
-    changeStock(req) {
+    changeStockValue(req) {
       const requestToStore = req === 'refill'
           ? 'product/addStockAmount'
           : 'product/decreaseStockAmount'
 
       const id = this.$route.name === 'product'
-      ?this.$store.getters['product/getProduct'].id
-      :this.$store.getters['product/getStock'].id
+          ? this.$store.getters['product/getProduct'].id
+          : this.$store.getters['product/getStock'].id
 
-      try {
-        this.$store.dispatch(requestToStore, {name:this.$route.name,id,amount:this.amount})
-            .then(() => {
-              this.amount = null;
-            }).catch((e) => {
-          this.$router.push({name: 'notFound'})
-        })
-      } catch (e) {
-        console.log('there is a problem in refill')
+      this.$store.dispatch(requestToStore, {name: this.$route.name, id, amount: this.amount})
+          .then(() => this.amount = null)
+          .catch((e) => {
+            let name = '404Resource'
+            // const status = e.response.status
 
-      }
+            if (e.code === "ERR_NETWORK") name = 'networkError'
+            this.$router.push({name,params:{message:e.message, res:e.response.data}})
+          })
+
     },
   },
 }

@@ -1,6 +1,13 @@
 <template>
   <div>
-  <h1>Oops! Not found -- 404</h1>
+    <div v-if="$route.name === '404Resource'">
+      <h1>{{ $route.params.message }}</h1>
+      <p > {{$route.params.res}}</p>
+    </div>
+    <div v-else>
+        <h1>This page not found</h1>
+    </div>
+
     <p>Back to
       <router-link :to="{name:'product'}">Home</router-link>
     </p>

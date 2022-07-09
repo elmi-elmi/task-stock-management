@@ -5,10 +5,10 @@
     >
       <NoSearchFallbackComp v-if="!stock.id" page="Stock"/>
       <DisplayResultComp :result="stock" v-else title="Stock"/>
-      <InputAmountComp v-if="stock.id"/>
+      <SellAndBuyComp v-if="stock.id"/>
 
     </v-card>
-    <SearchCardComp label="Search Stock" />
+    <SearchByIdComp label="Search Stock By Id" />
 
   </div>
 </template>
@@ -16,10 +16,10 @@
 <script>
 import NoSearchFallbackComp from "@/components/NoSearchFallbackComp";
 import DisplayResultComp from "@/components/DisplayResultComp";
-import SearchCardComp from "@/components/SearchCardComp";
-import InputAmountComp from "@/components/InputAmountComp";
+import SearchByIdComp from "@/components/request/SearchByIdComp";
+import SellAndBuyComp from "@/components/request/SellAndBuyComp";
 export default{
-  components:{SearchCardComp, NoSearchFallbackComp, DisplayResultComp, InputAmountComp},
+  components:{SearchByIdComp, NoSearchFallbackComp, DisplayResultComp, SellAndBuyComp},
   computed: {
     stock() {
       return this.$store.getters['product/getStock']

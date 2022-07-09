@@ -4,11 +4,11 @@
     >
       <NoSearchFallbackComp v-if="!product.name"/>
       <DisplayResultComp v-else :result="product" title="Product"/>
-      <InputAmountComp v-if="product.name"/>
+      <SellAndBuyComp v-if="product.name"/>
 
     </v-card>
 
-    <SearchCardComp />
+    <SearchByIdComp />
 
 
   </div>
@@ -17,14 +17,14 @@
 
 <script>
 
-import SearchCardComp from "@/components/SearchCardComp";
-import InputAmountComp from "@/components/InputAmountComp";
+import SearchByIdComp from "@/components/request/SearchByIdComp";
+import SellAndBuyComp from "@/components/request/SellAndBuyComp";
 import NoSearchFallbackComp from "@/components/NoSearchFallbackComp";
 import DisplayResultComp from "@/components/DisplayResultComp";
 
 export default {
   name: 'ProductView',
-  components: {SearchCardComp, InputAmountComp, NoSearchFallbackComp,DisplayResultComp},
+  components: {SearchByIdComp, SellAndBuyComp, NoSearchFallbackComp,DisplayResultComp},
 
   computed: {
     product() {

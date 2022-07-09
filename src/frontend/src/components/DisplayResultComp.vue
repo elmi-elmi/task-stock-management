@@ -33,7 +33,6 @@
 <script>
 export default {
   name: "DisplayResult",
-
   computed: {
     product() {
       return this.$store.getters['product/getProduct']

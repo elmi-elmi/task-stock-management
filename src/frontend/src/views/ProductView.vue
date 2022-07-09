@@ -87,39 +87,41 @@
     </v-card>
 
 
-    <v-card
-        class="mx-auto pa-4 d-flex align-center  "
-        max-width="400px"
-        min-height="120px"
-        outlined
-        elevation="18"
-    >
+<!--    <v-card-->
+<!--        class="mx-auto pa-4 d-flex align-center  "-->
+<!--        max-width="400px"-->
+<!--        min-height="120px"-->
+<!--        outlined-->
+<!--        elevation="18"-->
+<!--    >-->
 
-      <v-text-field
-          autofocus
-          class="mb-2"
-          v-model.number="id"
-          label="Enter Id"
-          light
-          flat
-          clearable
-          clear-icon="mdi-close-circle-outline"
-          @keyup.enter="searchProduct"
+<!--      <v-text-field-->
+<!--          autofocus-->
+<!--          class="mb-2"-->
+<!--          v-model.number="id"-->
+<!--          label="Enter Id"-->
+<!--          light-->
+<!--          flat-->
+<!--          clearable-->
+<!--          clear-icon="mdi-close-circle-outline"-->
+<!--          @keyup.enter="searchProduct"-->
 
-      ></v-text-field>
+<!--      ></v-text-field>-->
 
-      <v-btn
-          :disabled="!id"
-          class="mx-2" fab dark small color="teal"
-          @click="searchProduct"
+<!--      <v-btn-->
+<!--          :disabled="!id"-->
+<!--          class="mx-2" fab dark small color="teal"-->
+<!--          @click="searchProduct"-->
 
-      >
-        <v-icon light>
-          mdi-magnify
-        </v-icon>
-      </v-btn>
+<!--      >-->
+<!--        <v-icon light>-->
+<!--          mdi-magnify-->
+<!--        </v-icon>-->
+<!--      </v-btn>-->
 
-    </v-card>
+<!--    </v-card>-->
+
+    <SearchCardComp v-model="id" @search="searchProduct" />
 
 
   </div>
@@ -128,9 +130,10 @@
 
 <script>
 import ProductService from "@/services/ProductService";
-
+import SearchCardComp from "@/components/SearchCardComp";
 export default {
   name: 'ProductView',
+  components:{SearchCardComp},
   data() {
     return {id: null, amount: null}
   },
@@ -149,6 +152,7 @@ export default {
             }).catch((e) => {
           console.log('---- 404')
           console.log(e)
+          this.$router.push({name:'notFound'})
         })
 
 

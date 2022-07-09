@@ -1,6 +1,6 @@
 <template>
   <div>
-  <h1>Oops! Not found</h1>
+  <h1>Oops! Not found -- 404</h1>
     <p>Back to
       <router-link :to="{name:'product'}">Home</router-link>
     </p>

@@ -5,7 +5,7 @@ export default {
         REQUESTS TO BACKEND
      =======================================================*/
     /*
-     *  GET request --> to fetch product by Id
+     *  GET request --> to fetch product by ID
      */
     fetchProductById({commit}, productId) {
         return ProductService.getProductById(productId)
@@ -14,29 +14,39 @@ export default {
 
 
     /*
-     *  GET request --> to fetch Stock by Id
+     *  GET request --> to fetch Stock by ID
      */
     fetchStockById({commit}, stockId) {
         return ProductService.getStockById(stockId)
-            .then(({data}) => commit('SET_STOCK', data))
+            .then(({data}) => commit('SET_STOCK', {data, stockId}))
     },
 
 
     /*
      *  PUT request --> to increase amount of a stock
      */
-    addStockAmount({commit, getters}, amount) {
-        return ProductService.putRefillProduct(getters.getProduct, amount)
+    addStockAmount({commit}, {name,id,amount}) {
+        // IF REQUEST FROM PRODUCT ROUTE
+        if (name === 'product') return ProductService.putRefillProduct(id,amount)
             .then(({data}) => commit('REFILL_PRODUCT', data))
+
+        // IF REQUEST FROM STOCK ROUTE
+        return ProductService.putRefillProduct(id, amount)
+            .then(({data}) => commit('REFILL_STOCK', data))
     },
 
 
     /*
      *  PUT request --> to decrease amount of a stock
      */
-    decreaseStockAmount({commit, getters}, amount) {
-        return ProductService.putDecreaseProduct(getters.getProduct, amount)
+    decreaseStockAmount({commit}, {name,id,amount}) {
+        // IF REQUEST FROM PRODUCT ROUTE
+        if (name === 'product') return ProductService.putDecreaseProduct(id, amount)
             .then(({data}) => commit('DECREASE_PRODUCT', data))
+
+        // IF REQUEST FROM STOCK ROUTE
+        return ProductService.putDecreaseProduct(id, amount)
+            .then(({data}) => commit('DECREASE_STOCK', data))
     }
 
 }

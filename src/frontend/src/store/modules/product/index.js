@@ -8,7 +8,7 @@ export default {
     namespaced: true,
     state: {
         product: {},
-        stock: null
+        stock: {}
     },
     mutations,
     actions,

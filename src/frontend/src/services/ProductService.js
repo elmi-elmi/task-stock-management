@@ -44,8 +44,8 @@ export default{
    *  PUT request
    *  $ curl -s -i -w "\n" -X PUT localhost:8080/api/product/1/refill?amount=5
    */
-    putRefillProduct(product,amount){
-        return api.put(`/product/${product.id}/refill?amount=${amount}`)
+    putRefillProduct(id,amount){
+        return api.put(`/product/${id}/refill?amount=${amount}`)
     },
 
 
@@ -53,8 +53,8 @@ export default{
    *  PUT request
    *  $ curl -s -i -w "\n" -X PUT localhost:8080/api/product/1/buy?amount=3
    */
-    putDecreaseProduct(product, amount){
-        return api.put(`/product/${product.id}/buy?amount=${amount}`)
+    putDecreaseProduct(id, amount){
+        return api.put(`/product/${id}/buy?amount=${amount}`)
     }
 
 }

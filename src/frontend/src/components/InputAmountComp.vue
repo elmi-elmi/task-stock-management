@@ -51,11 +51,18 @@ export default {
       const requestToStore = req === 'refill'
           ? 'product/addStockAmount'
           : 'product/decreaseStockAmount'
+
+      const id = this.$route.name === 'product'
+      ?this.$store.getters['product/getProduct'].id
+      :this.$store.getters['product/getStock'].id
+
       try {
-        this.$store.dispatch(requestToStore, this.amount)
+        this.$store.dispatch(requestToStore, {name:this.$route.name,id,amount:this.amount})
             .then(() => {
               this.amount = null;
-            })
+            }).catch((e) => {
+          this.$router.push({name: 'notFound'})
+        })
       } catch (e) {
         console.log('there is a problem in refill')
 

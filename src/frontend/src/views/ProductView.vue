@@ -7,10 +7,11 @@
         outlined
         elevation="18"
     >
-      <v-list-item three-line
-                   class="mb-12"
+
+      <v-list-item three-line class="mb-12"
       >
         <v-list-item-content>
+
           <v-card
               class="d-flex align-center justify-space-between mb-2"
               flat
@@ -23,10 +24,15 @@
               {{ $store.getters['product/getProduct'].id }}
             </div>
           </v-card>
+
           <v-list-item-title class="text-h5 mb-1">
             {{ $store.getters['product/getProduct'].name }}
           </v-list-item-title>
-          <v-list-item-subtitle>{{ $store.getters['product/getProduct'].stock }}</v-list-item-subtitle>
+
+          <v-list-item-subtitle>
+            {{ $store.getters['product/getProduct'].stock }}
+          </v-list-item-subtitle>
+
         </v-list-item-content>
 
       </v-list-item>
@@ -35,7 +41,7 @@
           class="d-flex justify-center align-center mb-2 " flat tile
       >
         <v-text-field
-            v-if="title"
+            v-if="product.name"
             class="mb-4"
             v-model="amount"
             label="Refill or Decrease Stock"
@@ -65,9 +71,9 @@
         </v-btn>
       </v-card>
       <div
-          v-if="!title"
+          v-if="!product"
 
-          class="search-something"
+          class="searchProduct-something"
       >
         <p>Search Products</p>
         <v-icon
@@ -98,24 +104,24 @@
           flat
           clearable
           clear-icon="mdi-close-circle-outline"
-          @keyup.enter="search"
+          @keyup.enter="searchProduct"
 
       ></v-text-field>
 
       <v-btn
           :disabled="!id"
           class="mx-2" fab dark small color="teal"
-          @click="search"
+          @click="searchProduct"
 
       >
         <v-icon light>
           mdi-magnify
         </v-icon>
-
       </v-btn>
 
-
     </v-card>
+
+
   </div>
 
 </template>
@@ -124,42 +130,52 @@
 import ProductService from "@/services/ProductService";
 
 export default {
-  name: 'Home',
+  name: 'ProductView',
   data() {
-    return {title: null, id: null, amount: null}
+    return {id: null, amount: null}
   },
-  mounted() {
-
+  computed: {
+    product() {
+      return this.$store.getters['product/getProduct']
+    }
   },
   methods: {
-    search() {
+    searchProduct() {
       try {
         this.$store.dispatch('product/fetchProductById', this.id)
             .then(() => {
-              this.title = this.$store.getters['product/getProduct']
               this.id = null
               this.amount = null;
-            })
+            }).catch((e) => {
+          console.log('---- 404')
+          console.log(e)
+        })
+
 
       } catch (e) {
-        console.log('there is a problem')
+        console.log('there is a problem (500)')
+        console.log(e)
+
       }
     },
     showStock() {
       try {
         this.$store.dispatch('product/fetchStockById', 10)
             .then(() => {
-              this.title = this.$store.getters['product/getStock']
-            })
+              this.product = this.$store.getters['product/getStock']
+            }).catch((e) => {
+          console.log('---- 404')
+          console.log(e)
+        })
       } catch (e) {
-        console.log('there is a problem in stock')
+        console.log('there is a problem in stock (500)')
+        console.log(e)
       }
     },
     refill() {
       try {
         this.$store.dispatch('product/addStockAmount', this.amount)
             .then(() => {
-              this.title = this.$store.getters['product/getProduct']
               this.amount = null;
             })
       } catch (e) {
@@ -170,7 +186,6 @@ export default {
     decreaseAmount() {
       try {
         this.$store.dispatch('product/decreaseStockAmount', this.amount).then(() => {
-          this.title = this.$store.getters['product/getProduct'];
           this.amount = null;
 
         })
@@ -181,14 +196,13 @@ export default {
   },
 
 
-
 }
 </script>
 
 
 <style lang="scss">
 
-.search-something {
+.searchProduct-something {
   text-align: center;
   position: absolute;
   top: 70%;

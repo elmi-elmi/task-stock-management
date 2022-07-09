@@ -1,20 +1,13 @@
 <template>
   <v-app id="inspire">
-    <v-app-bar
-        app
-        color="white"
-        flat
+    <v-app-bar app color="white" flat
     >
-
-
-      <v-tabs
-          centered
-          class="ml-n9"
-          color="grey darken-1"
+      <v-tabs centered class="ml-n9" color="grey darken-1"
       >
         <v-tab
             v-for="link in links"
             :key="link"
+            :to="{name:link.toLowerCase()}"
         >
           {{ link }}
         </v-tab>
@@ -25,20 +18,13 @@
     <v-main class="grey lighten-3">
       <v-container>
         <v-row>
-          <v-col
-              cols="12"
-              sm="2"
+          <v-col cols="12" sm="2"
           >
-
           </v-col>
 
-          <v-col
-              cols="12"
-              sm="8"
+          <v-col cols="12" sm="8"
           >
-
               <router-view/>
-
           </v-col>
 
 

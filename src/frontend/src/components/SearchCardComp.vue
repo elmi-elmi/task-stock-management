@@ -12,7 +12,7 @@
         class="mb-2"
         :value="value"
         @input="handelInput"
-        label="Enter Id"
+        :label="label"
         light
         flat
         clearable
@@ -42,6 +42,10 @@ export default {
     value:{
       type:String,
       default:null
+    },
+    label:{
+      type:String,
+      default:'Enter Id'
     }
   },
   emits:['input','search'],

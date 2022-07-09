@@ -47,7 +47,6 @@ export default {
       'Stock',
 
     ],
-    page:2
   }),
 };
 </script>

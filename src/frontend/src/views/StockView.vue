@@ -3,7 +3,7 @@
     <v-expand-transition
     >
     <v-card
-        v-show="expand"
+        v-show="expand || stock.id"
         class=" mx-auto  mb-1 "
         width="400px"
         height="300px"

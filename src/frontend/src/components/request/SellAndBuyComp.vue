@@ -63,6 +63,7 @@ export default {
             // const status = e.response.status
 
             if (e.code === "ERR_NETWORK") name = 'networkError'
+            console.log(e)
             this.$router.push({name,params:{message:e.message, res:e.response.data}})
           })
 

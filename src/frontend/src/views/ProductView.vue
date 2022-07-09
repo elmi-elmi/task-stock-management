@@ -1,14 +1,10 @@
 <template>
-  <div
-
-  >
-
+  <div>
     <v-expand-transition
-        class="mb-2"
     >
     <v-card
         v-show="expand || product.id"
-        class=" mx-auto  mb-1 "
+        class=" mx-auto  mb-1"
         width="400px"
         height="300px"
         outlined elevation="18"
@@ -20,8 +16,7 @@
     </v-card>
     </v-expand-transition>
 
-
-    <SearchByIdComp v-model="expand"  />
+    <SearchByIdComp v-model="expand" />
 
 
   </div>

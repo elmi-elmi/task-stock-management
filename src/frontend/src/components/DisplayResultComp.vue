@@ -1,6 +1,5 @@
 <template>
   <div
-  class="pa-4"
   >
   <v-list-item
       three-line class="mb-12  "
@@ -24,7 +23,7 @@
       <v-list-item-title
           v-for="(item, key) in result"
           :key="key"
-          class="text-h5 mb-1">
+          class="text-h5">
         <span v-if="key!=='id' && key !=='reservations'">{{ item }}</span>
       </v-list-item-title>
 

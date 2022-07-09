@@ -69,6 +69,7 @@ export default {
           .catch((e) => {
             let name = '404Resource'
             if (e.code === "ERR_NETWORK") name = 'networkError'
+            console.log(e)
             this.$router.push({name, params: {message: e.message,res:e.response.data}})
           })
 

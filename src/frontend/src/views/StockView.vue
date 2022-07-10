@@ -55,7 +55,7 @@ export default {
       snackbar: false,
       timeout: 2000,
       messageSnack: '',
-      tweenStock: this.stock.value
+      tweenStock: this.stock.value || 0
 
     }
   },

@@ -1,11 +1,15 @@
 <template>
   <div
   >
+  <DeleteActionComp/>
+
   <v-list-item
-      three-line class="mb-12  "
+    class="mb-8  "
 
   >
+
     <v-list-item-content>
+
       <v-card
           min-width="260"
           class="d-flex align-center justify-space-between mb-2 "
@@ -35,8 +39,11 @@
 </template>
 
 <script>
+import DeleteActionComp from "@/components/request/DeleteActionComp";
 export default {
   name: "DisplayResult",
+  data(){return{alert:true}},
+  components:{DeleteActionComp},
   // computed: {
   //   product() {
   //     return this.$store.getters['product/getProduct']
@@ -52,6 +59,12 @@ export default {
     result: {
       type: Object,
       require: true
+    }
+  },
+  methods:{
+    deleteResult(){
+      console.log('*****')
+
     }
   }
 }

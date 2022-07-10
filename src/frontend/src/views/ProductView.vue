@@ -1,6 +1,8 @@
 <template>
   <div>
+
     <v-expand-transition
+
     >
     <v-card
         v-show="expand || product.id"
@@ -9,6 +11,7 @@
         height="300px"
         outlined elevation="18"
     >
+
       <NoSearchFallbackComp v-if="!product.name"/>
       <DisplayResultComp v-else :result="product" title="Product"/>
       <SellAndBuyComp v-if="product.name"/>
@@ -16,7 +19,7 @@
     </v-card>
     </v-expand-transition>
 
-    <SearchByIdComp v-model="expand" />
+    <SearchByIdComp v-model="expand" label="Search Product By Id" />
 
 
   </div>
@@ -33,7 +36,7 @@ import DisplayResultComp from "@/components/DisplayResultComp";
 export default {
   name: 'ProductView',
   components: {SearchByIdComp, SellAndBuyComp, NoSearchFallbackComp,DisplayResultComp},
-  data(){return{expand: false,}},
+  data(){return{expand: false,alert:true}},
 
   computed: {
     product() {

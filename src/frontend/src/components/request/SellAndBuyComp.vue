@@ -3,7 +3,7 @@
       class="d-flex justify-center align-center mb-2 pa-4 " flat tile
   >
     <v-text-field
-        class="mb-4"
+        class="mb-2"
         v-model="amount"
         label="Refill or Decrease Stock"
         light

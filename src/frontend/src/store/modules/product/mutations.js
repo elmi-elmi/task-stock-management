@@ -20,6 +20,10 @@ export default  {
         state.product = product
     },
 
+    DELETE_PRODUCT(state){
+        state.product = {}
+    },
+
     /*=======================================================
                              STOCK
       ======================================================= */
@@ -41,6 +45,10 @@ export default  {
 
     DECREASE_STOCK(state,product){
         state.stock.value = product.stock
+    },
+
+    DELETE_STOCK(state){
+        state.stock = {}
     },
 
 

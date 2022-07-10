@@ -1,6 +1,7 @@
 <template>
   <div
       class="no-search"
+
   >
     <p>Search {{page}}</p>
     <v-icon

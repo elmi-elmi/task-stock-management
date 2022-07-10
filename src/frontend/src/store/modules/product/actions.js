@@ -25,12 +25,13 @@ export default {
     /*
      *  PUT request --> to increase amount of a stock
      */
+    // Todo -- Change to 2 separate functions
     addStockAmount({commit}, {name,id,amount}) {
-        // IF REQUEST FROM PRODUCT ROUTE
+        // IF GETTING REQUEST FROM PRODUCT ROUTE
         if (name === 'product') return ProductService.putRefillProduct(id,amount)
             .then(({data}) => commit('REFILL_PRODUCT', data))
 
-        // IF REQUEST FROM STOCK ROUTE
+        // IF GETTING REQUEST FROM STOCK ROUTE
         return ProductService.putRefillProduct(id, amount)
             .then(({data}) => commit('REFILL_STOCK', data))
     },
@@ -39,12 +40,13 @@ export default {
     /*
      *  PUT request --> to decrease amount of a stock
      */
+    // Todo -- Change to 2 separate functions
     decreaseStockAmount({commit}, {name,id,amount}) {
-        // IF REQUEST FROM PRODUCT ROUTE
+        // IF GETTING REQUEST FROM PRODUCT ROUTE
         if (name === 'product') return ProductService.putDecreaseProduct(id, amount)
             .then(({data}) => commit('DECREASE_PRODUCT', data))
 
-        // IF REQUEST FROM STOCK ROUTE
+        // IF GETTING REQUEST  FROM STOCK ROUTE
         return ProductService.putDecreaseProduct(id, amount)
             .then(({data}) => commit('DECREASE_STOCK', data))
     }

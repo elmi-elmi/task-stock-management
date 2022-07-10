@@ -49,7 +49,7 @@ export default {
   methods: {
     // dispatch action -- to increase or decrease amount of the stock
     changeStockValue(req) {
-      // select which apis should be send
+      // select which apis should be sent
       const requestToStore = req === 'refill'
           ? 'product/addStockAmount'
           : 'product/decreaseStockAmount'

@@ -17,6 +17,7 @@ export default {
   name: "DeleteActionComp",
   methods:{
     deleteShowedResult(){
+      //
       const requestToStore = this.$route.name === 'product'
           ? 'product/DELETE_PRODUCT'
           : 'product/DELETE_STOCK'

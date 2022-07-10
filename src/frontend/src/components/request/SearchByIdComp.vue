@@ -10,7 +10,7 @@
     <v-text-field
         autofocus
         class="mb-2"
-        v-model="id"
+        v-model.number.trim="id"
         :label="label"
         @input="expandHandling"
         light
@@ -18,6 +18,7 @@
         clearable
         clear-icon="mdi-close-circle-outline"
         @keyup.enter="sendRequest"
+        :rules="rules"
 
     ></v-text-field>
 
@@ -39,7 +40,11 @@
 export default {
   name: "SearchCardComp",
   data() {
-    return {id: null}
+    return {id: null,
+      rules:[
+
+          value=> (typeof value === 'number' || value === '' || value==null) || 'ID is a number'
+      ]}
   },
   emits:['value'],
   props: {

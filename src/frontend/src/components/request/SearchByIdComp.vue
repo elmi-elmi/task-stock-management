@@ -40,13 +40,14 @@
 export default {
   name: "SearchCardComp",
   data() {
-    return {id: null,
-      rules:[
-
-          value=> (typeof value === 'number' || value === '' || value==null) || 'ID is a number'
-      ]}
+    return {
+      id: null,
+      rules: [
+        value => (typeof value === 'number' || value === '' || value == null) || 'ID is a number'
+      ]
+    }
   },
-  emits:['value'],
+  emits: ['value'],
   props: {
     // label for input
     label: {
@@ -54,17 +55,17 @@ export default {
       default: 'Enter Id'
     },
     // v-model to update a value from parent
-    value:{
-      type:Boolean,
-      default:false
+    value: {
+      type: Boolean,
+      default: false
     }
   },
-  computed:{
+  computed: {
     // whether the result display expanding or not
     // this method update v-model(named id) from parent
-    expandHandling(){
+    expandHandling() {
       // parant v-model update
-       this.$emit('input',!!this.id)
+      this.$emit('input', !!this.id)
     }
   },
   methods: {
@@ -84,7 +85,7 @@ export default {
             let name = '404Resource'
             if (e.code === "ERR_NETWORK") name = 'networkError'
 
-            this.$router.push({name, params: {message: e.message,res:e.response.data}})
+            this.$router.push({name, params: {message: e.message, res: e.response.data}})
           })
 
     }

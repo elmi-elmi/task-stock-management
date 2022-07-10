@@ -1,4 +1,4 @@
-export default  {
+export default {
     /*=======================================================
                             PRODUCT
      ======================================================= */
@@ -12,15 +12,15 @@ export default  {
     /*
      *  update amount of stock in the `state.product`
      */
-    REFILL_PRODUCT(state, product){
+    REFILL_PRODUCT(state, product) {
         state.product = product
     },
 
-    DECREASE_PRODUCT(state,product){
+    DECREASE_PRODUCT(state, product) {
         state.product = product
     },
 
-    DELETE_PRODUCT(state){
+    DELETE_PRODUCT(state) {
         state.product = {}
     },
 
@@ -31,27 +31,27 @@ export default  {
     /*
      *  requested stock save in the `state.stock`
      */
-    SET_STOCK(state, {data,stockId}){
-        state.stock = {value:data,id:stockId}
+    SET_STOCK(state, {data, stockId}) {
+        state.stock = {value: data, id: stockId}
 
     },
     /*
      *  update value of stock in the `state.stock`
      */
 
-    REFILL_STOCK(state, product){
-        state.stock.value = product.stock
+    REFILL_STOCK(state, product) {
+        state.stock = {value: product.stock, id: product.id}
     },
 
-    DECREASE_STOCK(state,product){
-        state.stock.value = product.stock
+    DECREASE_STOCK(state, product) {
+        state.stock = {value: product.stock, id: product.id}
     },
 
-    DELETE_STOCK(state){
+    DELETE_STOCK(state) {
         state.stock = {}
     },
 
 
-
     // Todo => change to UPDATE_PRODUCT Or just update amount
 }
+

@@ -24,12 +24,23 @@
         </div>
       </v-card>
 
-      <v-list-item-title
-          v-for="(item, key) in result"
-          :key="key"
-          class="text-h5">
-        <span v-if="key!=='id' && key !=='reservations'">{{ item }}</span>
+      <v-list-item-title>
+        <span
+            class="text-h5"
+        >{{result.name}}</span>
       </v-list-item-title>
+
+      <v-list-item-title>
+        <span
+            class="text-h5"
+        >{{stockTween}}</span>
+      </v-list-item-title>
+<!--      <v-list-item-title-->
+<!--          v-for="(item, key) in result"-->
+<!--          :key="key"-->
+<!--          class="text-h5">-->
+<!--        <span v-if="key!=='id' && key !=='reservations'">{{ item }}</span>-->
+<!--      </v-list-item-title>-->
 
 
     </v-list-item-content>
@@ -59,6 +70,10 @@ export default {
     result: {
       type: Object,
       require: true
+    },
+    stockTween:{
+      type:String,
+      required:true
     }
   },
   methods:{

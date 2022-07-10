@@ -13,13 +13,14 @@
       >
 
         <NoSearchFallbackComp v-if="!product.name"/>
-        <DisplayResultComp v-else :result="product" title="Product"/>
+        <DisplayResultComp :stock-tween="Math.trunc(tweenStock || product.stock)" v-else :result="product" title="Product"/>
         <SellAndBuyComp v-if="product.name"/>
 
       </v-card>
     </v-expand-transition>
 
     <SearchByIdComp v-model="expand" label="Search Product By Id"/>
+
 
     <div class="text-center d-flex mx-auto">
 
@@ -56,7 +57,8 @@ export default {
       colorSnackbar: 'success',
       snackbar: false,
       timeout: 2000,
-      messageSnack: '', tweennum: 0
+      messageSnack: '',
+      tweenStock: this.stock
     }
 
   },
@@ -70,7 +72,14 @@ export default {
     }
   },
   watch: {
+    stock:function(newVal, preVal){
+      gsap.to(this.$data,{
+        duration:0.5,
+        ease:'ease-out',
+        tweenStock:newVal
 
+      })
+    },
     // watch product to show snackbar
     product: function (newVal, preVal) {
       if (!this.product.id) {

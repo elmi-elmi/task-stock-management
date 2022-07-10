@@ -10,7 +10,7 @@
           outlined elevation="18"
       >
         <NoSearchFallbackComp v-if="!stock.id" page="Stock"/>
-        <DisplayResultComp :result="stock" v-else title="Stock"/>
+        <DisplayResultComp :stock-tween="Math.trunc(tweenStock || stock.value)"  :result="stock" v-else title="Stock"/>
         <SellAndBuyComp v-if="stock.id"/>
 
       </v-card>
@@ -36,6 +36,7 @@ import NoSearchFallbackComp from "@/components/NoSearchFallbackComp";
 import DisplayResultComp from "@/components/DisplayResultComp";
 import SearchByIdComp from "@/components/request/SearchByIdComp";
 import SellAndBuyComp from "@/components/request/SellAndBuyComp";
+import {gsap} from "gsap";
 
 
 export default {
@@ -45,6 +46,7 @@ export default {
       return this.$store.getters['product/getStock']
     },
 
+
   },
   data() {
     return {
@@ -52,10 +54,20 @@ export default {
       colorSnackbar: 'success',
       snackbar: false,
       timeout: 2000,
-      messageSnack: ''
+      messageSnack: '',
+      tweenStock: this.stock.value
+
     }
   },
+  // tween
   watch: {
+    'stock.value':function(newVal, preVal){
+      gsap.to(this.$data,{
+        duration:0.5,
+        ease:'ease-out',
+        tweenStock:newVal
+      })
+    },
     // watch stock to show snackbar product
     stock: function (newVal, preVal) {
       if (!this.stock.id) {

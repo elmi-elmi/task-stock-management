@@ -80,6 +80,9 @@ export default {
 
       })
     },
+
+    // Todo -- merge product and stock snackbars
+
     // watch product to show snackbar
     product: function (newVal, preVal) {
       if (!this.product.id) {

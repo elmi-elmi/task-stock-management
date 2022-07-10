@@ -35,12 +35,6 @@
             class="text-h5"
         >{{stockTween}}</span>
       </v-list-item-title>
-<!--      <v-list-item-title-->
-<!--          v-for="(item, key) in result"-->
-<!--          :key="key"-->
-<!--          class="text-h5">-->
-<!--        <span v-if="key!=='id' && key !=='reservations'">{{ item }}</span>-->
-<!--      </v-list-item-title>-->
 
 
     </v-list-item-content>
@@ -55,11 +49,7 @@ export default {
   name: "DisplayResult",
   data(){return{alert:true}},
   components:{DeleteActionComp},
-  // computed: {
-  //   product() {
-  //     return this.$store.getters['product/getProduct']
-  //   }
-  // },
+
   props: {
     // title for card
     title: {

@@ -37,16 +37,18 @@
 <script>
 export default {
   name: "DisplayResult",
-  computed: {
-    product() {
-      return this.$store.getters['product/getProduct']
-    }
-  },
+  // computed: {
+  //   product() {
+  //     return this.$store.getters['product/getProduct']
+  //   }
+  // },
   props: {
+    // title for card
     title: {
       type: String,
       require: true
     },
+    // this is the object parant want to show
     result: {
       type: Object,
       require: true

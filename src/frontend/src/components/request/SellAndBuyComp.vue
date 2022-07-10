@@ -47,23 +47,27 @@ export default {
   },
 
   methods: {
+    // dispatch action -- to increase or decrease amount of the stock
     changeStockValue(req) {
+      // select which apis should be send
       const requestToStore = req === 'refill'
           ? 'product/addStockAmount'
           : 'product/decreaseStockAmount'
 
+      // get id
       const id = this.$route.name === 'product'
           ? this.$store.getters['product/getProduct'].id
           : this.$store.getters['product/getStock'].id
 
+      // send request to store
       this.$store.dispatch(requestToStore, {name: this.$route.name, id, amount: this.amount})
-          .then(() => this.amount = null)
+          .then(() => this.amount = null) // clear input
           .catch((e) => {
+            // Todo -- check status error
             let name = '404Resource'
             // const status = e.response.status
 
             if (e.code === "ERR_NETWORK") name = 'networkError'
-            console.log(e)
             this.$router.push({name,params:{message:e.message, res:e.response.data}})
           })
 

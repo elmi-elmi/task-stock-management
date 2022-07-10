@@ -43,33 +43,42 @@ export default {
   },
   emits:['value'],
   props: {
+    // label for input
     label: {
       type: String,
       default: 'Enter Id'
     },
+    // v-model to update a value from parent
     value:{
       type:Boolean,
       default:false
     }
   },
   computed:{
+    // whether the result display expanding or not
+    // this method update v-model(named id) from parent
     expandHandling(){
+      // parant v-model update
        this.$emit('input',!!this.id)
     }
   },
   methods: {
 
+    // dispatch action through the store
     sendRequest() {
+      // which apis has been called -- product/:id or :id/stock
       const requestToStore = this.$route.name === 'product'
           ? 'product/fetchProductById'
           : 'product/fetchStockById'
 
       this.$store.dispatch(requestToStore, this.id)
-          .then(() => this.id = null)
+
+          .then(() => this.id = null) // if request has been done successfully  the value in input clear
           .catch((e) => {
+            // Todo -- Check Error status
             let name = '404Resource'
             if (e.code === "ERR_NETWORK") name = 'networkError'
-            console.log(e)
+
             this.$router.push({name, params: {message: e.message,res:e.response.data}})
           })
 

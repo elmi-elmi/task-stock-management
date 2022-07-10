@@ -6,6 +6,7 @@
     <v-icon
         x-large
         color="green darken-2"
+        class="rotate"
     >
       mdi-magnify
     </v-icon>
@@ -35,6 +36,11 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   opacity: 50%;
+
+}
+.rotate:hover{
+  transition: all 0.7s ease-out;
+  transform:rotate(360deg) scale(1.2);
 }
 
 
